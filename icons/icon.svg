@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#grad1)"/>
+
+  <!-- Globe Grid -->
+  <ellipse cx="64" cy="64" rx="45" ry="20" fill="none" stroke="white" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="64" cy="64" rx="20" ry="45" fill="none" stroke="white" stroke-width="2" opacity="0.4"/>
+  <circle cx="64" cy="64" r="45" fill="none" stroke="white" stroke-width="2" opacity="0.4"/>
+
+  <!-- Language A -->
+  <text x="38" y="58" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">A</text>
+
+  <!-- Chinese Character "文" -->
+  <text x="90" y="58" font-family="SimSun, serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">文</text>
+
+  <!-- Arrow Between Languages -->
+  <path d="M 52 64 L 76 64" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <polygon points="72,60 80,64 72,68" fill="white"/>
+
+  <!-- Translation Symbol -->
+  <text x="64" y="85" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle" opacity="0.9">翻译</text>
+</svg>

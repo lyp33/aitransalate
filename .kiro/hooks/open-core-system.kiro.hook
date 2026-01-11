@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Open Core System",
+  "description": "Opens the Thai Life SIT sandbox admin portal at https://thailifesit-sandbox-thailife-th.insuremo.com/ui/admin/ ,  click 'local login' then login by credentials x10_dev_team / X10dev@1234 ",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Open the website https://thailifesit-sandbox-thailife-th.insuremo.com/ui/admin/ in a browser. The login credentials are: username: x10_dev_team, password: X10dev@1234"
+  }
+}

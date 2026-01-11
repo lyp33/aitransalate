@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Upload File to Tracker",
+  "description": "Logs into alm.ebaotech.com with provided credentials, searches for tracker artf1486752, and uploads specified files as attachments to that tracker",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Please help me upload files to the tracker. Follow these steps:\n1. Login to https://alm.ebaotech.com/ using username: yunpeng.li and password: Liyufg001!\n2. Search for tracker artf1486752\n3. Upload the specified files as attachments to this tracker\n\nAsk me which files I want to upload if not already specified."
+  }
+}
