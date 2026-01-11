@@ -169,15 +169,19 @@
 
     // 设置延迟，避免快速移动鼠标时频繁触发
     hoverTimer = setTimeout(async () => {
+      // 检查是否是trace id格式（32位十六进制字符串）
+      const traceIdPattern = /^[a-f0-9]{32}$/i;
+      const isTraceId = traceIdPattern.test(text.trim());
+      
       const detectedLang = detectLanguage(text);
-      if (shouldTranslate(detectedLang) || isError) {
-        showTooltipAt(event.clientX, event.clientY, '正在翻译...');
+      if (shouldTranslate(detectedLang) || isError || isTraceId) {
+        showTooltipAt(event.clientX, event.clientY, isTraceId ? '正在加载...' : '正在翻译...');
         try {
           if (isError) {
             // 处理错误消息：翻译 + AI建议 + 追踪链接
             await handleErrorMessageTranslation(text, detectedLang, target);
           } else {
-            // 普通翻译
+            // 普通翻译或trace id显示
             await translateText(text, detectedLang);
           }
         } catch (error) {
@@ -238,8 +242,12 @@
 
         // 检测语言并翻译
         const detectedLang = detectLanguage(selectedText);
-        if (shouldTranslate(detectedLang)) {
-          showTooltipAt(x, y, '正在翻译...');
+        // 检查是否是trace id格式
+        const traceIdPattern = /^[a-f0-9]{32}$/i;
+        const isTraceId = traceIdPattern.test(selectedText.trim());
+        
+        if (shouldTranslate(detectedLang) || isTraceId) {
+          showTooltipAt(x, y, isTraceId ? '正在加载...' : '正在翻译...');
           try {
             await translateText(selectedText, detectedLang);
           } catch (error) {
@@ -378,6 +386,19 @@
     isProcessing = true;
 
     try {
+      // 检查是否是trace id格式（32位十六进制字符串）
+      const traceIdPattern = /^[a-f0-9]{32}$/i;
+      if (traceIdPattern.test(text.trim())) {
+        // 这是一个trace id，直接显示跳转链接
+        const traceId = text.trim();
+        const env = extractEnvFromDomain();
+        const trackingUrl = `http://localhost:3000/?traceid=${traceId}&env=${env}`;
+        
+        const displayContent = `🔍 Trace ID: ${traceId}\n\n🔗 点击查看追踪详情：\n${trackingUrl}`;
+        updateTooltipContentWithLink(displayContent, trackingUrl);
+        return;
+      }
+
       // 检查API配置
       if (!config.apiConfig.url || !config.apiConfig.token) {
         updateTooltipContent('请先在插件设置中配置API', true);
